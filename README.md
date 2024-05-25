@@ -15,7 +15,7 @@ This is a RESTful API for a To-Do application that supports user authentication,
 
    ```bash
    git clone https://github.com/your-username/todo-app.git
-   cd todo-app
+   cd todo-backend
    ```
 
 2. Install the dependencies:
@@ -24,20 +24,13 @@ This is a RESTful API for a To-Do application that supports user authentication,
    npm install
    ```
 
-3. Generate RSA key pair for JWT authentication:
-
-   ```bash
-   openssl genpkey -algorithm RSA -out keys/private.key -aes256
-   openssl rsa -pubout -in keys/private.key -out keys/public.key
-   ```
-
-4. Create a `.env` file and add your MongoDB URI:
+3. Create a `.env` file and add your MongoDB URI:
 
    ```
-   MONGO_URI=your_mongo_uri
+   DB_URL=your_mongo_uri
    ```
 
-5. Start the server:
+4. Start the server:
    ```bash
    npm start
    ```
@@ -45,6 +38,6 @@ This is a RESTful API for a To-Do application that supports user authentication,
 ## POSTMAN COLLECTION
 
 ```
-https://www.postman.com/payload-participant-73085538/workspace/my-workspace/overview
+https://elements.getpostman.com/redirect?entityId=31334776-ed8eebf4-9a63-4a01-bf6a-706d5d176716&entityType=collection
 
 ```
