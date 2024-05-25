@@ -22,4 +22,4 @@ router.get("/user-detail", getUserDetail);
 router.delete( "/delete-user", deleteUser );
 router.patch('/change-password', updatePassword)
 
-export default router;
+export const  userRouter = router;

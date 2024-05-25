@@ -22,10 +22,9 @@ app.use(cookieParser());
 
 
 //import routes
-import userRoute from './src/routes/user.route.js'
-import todoRoute from './src/routes/todo.route.js'
-app.use('/api/v1/user', userRoute)
-app.use('/api/v1/todo', todoRoute)
+
+import router from './src/routes/index.js';
+app.use('/api/v1',router)
 
 app.listen( port, () => {
     console.log(`Server is running on port ${port}`)

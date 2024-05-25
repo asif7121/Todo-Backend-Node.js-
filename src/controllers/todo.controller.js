@@ -29,8 +29,12 @@ export default {
 
   getMyTodo: asyncHandler(async (req, res) => {
     try {
-      const { page = 1, limit = 10 } = req.query;
-      const todos = await Todo.find({ user: req.user.id })
+        const { page = 1, limit = 10, search } = req.query;
+        const filterQuery = { user: req.user.id };
+        if ( search ) {
+            filterQuery.title = { $regex: search, $options: 'i' };
+        }
+      const todos = await Todo.find( filterQuery)
         .limit(limit * 1)
         .skip((page - 1) * limit)
         .exec();
@@ -88,34 +92,6 @@ export default {
       .json(new ApiResponse(200, todo, "Todo deleted successfully"));
   }),
 
-  searchTodo: asyncHandler(async (req, res) => {
-    try {
-      const { query } = req.params;
-      const { page = 1, limit = 10 } = req.query;
-
-      const todos = await Todo.find({
-        user: req.user.id,
-        title: { $regex: query, $options: "i" },
-      })
-        .limit(parseInt(limit))
-        .skip((parseInt(page) - 1) * parseInt(limit))
-        .exec();
-
-      const count = await Todo.countDocuments({
-        user: req.user.id,
-        title: { $regex: query, $options: "i" },
-      });
-
-      res.json({
-        todos,
-        totalPages: Math.ceil(count / limit),
-        currentPage: parseInt(page),
-      });
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send("Server error");
-    }
-  }),
 
   getSingleTodo: asyncHandler(async (req, res) => {
     const { todoId } = req.params;
